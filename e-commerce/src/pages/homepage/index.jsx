@@ -1,16 +1,34 @@
 import { ProductApiCall } from "../../api/productApiCall"
 import { Navbar } from "../../components/navbar"
-import { useEffect } from "react"
-import  RecipeReviewCard  from "../../components/productCard";
+import { useEffect, useState } from "react"
+import RecipeReviewCard from "../../components/productCard";
 
 export const Home = () => {
+    const [products, setProducts] = useState([]);
+ 
     useEffect(() => {
-        ProductApiCall();
+        (async () => {
+            const data = await ProductApiCall();
+            setProducts(data);
+
+        })();
     }, []);
     return (
         <>
             <Navbar />
-            <RecipeReviewCard />
+            <main className="flex flex-wrap gap-6 justify-center mt-4">
+                {products
+                    ?.filter(
+                        (product) =>
+                            product?.title &&
+                            product?.price &&
+                            Array.isArray(product?.images) &&
+                            product.images.length > 0
+                    )
+                    .map((product) => (
+                        <RecipeReviewCard key={product.id} product={product} />
+                    ))}
+            </main>
 
         </>
     )
