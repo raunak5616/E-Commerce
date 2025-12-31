@@ -4,9 +4,34 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
+import { useCart } from '../../context/card-context';
+import { findCartItem } from '../../utils/findCardtUtils';
+import { findFavoriteItem } from '../../utils/findFavorite';
 export default function RecipeReviewCard({ product }) {
+  const { cartDispatch } = useCart();
+  const { cart,favorite } = useCart();
+  const isProductInCart = findCartItem(cart, product.id);
+  const isFavorite = findFavoriteItem(favorite, product.id);
+   const onFavoriteClick = (product) => {
+  cartDispatch({
+    type: isFavorite ? "REMOVE_FROM_FAVORITE" : "ADD_TO_FAVORITE",
+    payload: isFavorite ? product.id : product
+  });
+}
+ const onCartClick = (product) => {
+  cartDispatch({
+    type: isProductInCart ? "REMOVE_FROM_CART" : "ADD_TO_CART",
+    payload: isProductInCart ? product.id : product
+  });
+}
   return (
-    <Card sx={{ maxWidth: 345, border: '1px', boxShadow: 3 }}>
+    <Card sx={{
+      maxWidth: 345,
+      boxShadow: 3,
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+    }}>
       <CardMedia
         component="img"
         height="194"
@@ -15,22 +40,52 @@ export default function RecipeReviewCard({ product }) {
       />
       <CardContent>
         <Typography fontWeight="bold" sx={{ p: 1, }}>
-          <h3 className="text-gray-500">{product?.title}</h3>
+          <div className="text-gray-500">{product?.title}</div>
         </Typography>
         <Typography variant="body2" sx={{ p: 1, fontSize: '16px' }}>
           Price:   ₹{(product.price * 83).toFixed(0)}
         </Typography>
       </CardContent>
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button variant="outlined" color="error">
-          <span class="material-symbols-outlined">
+      <CardActions sx={{
+        mt: "auto",
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: 1,
+      }}>
+        <Button
+          variant={!isFavorite ? "outlined" : "contained"}
+          color="error"
+          sx={{
+            minWidth: 40,
+            height: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={() => { onFavoriteClick(product) }}
+        > <span class="material-symbols-outlined">
             favorite
           </span>
         </Button>
-        <Button variant="outlined" color="error">
-          <span class="material-symbols-outlined p-0.5 ">
-            shopping_cart
-          </span>
+
+        <Button
+          variant="outlined"
+          color="error"
+          sx={{
+            minWidth: 40,
+            height: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={() => { onCartClick(product) }}
+        >
+          <span class="material-symbols-outlined">
+            {
+              isProductInCart ?
+                'shopping_cart_checkout' : 'shopping_cart'
+            }</span>
+
         </Button>
       </CardActions>
     </Card>

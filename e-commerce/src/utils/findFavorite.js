@@ -1,0 +1,1 @@
+export const findFavoriteItem = (favorite,id) => favorite?.length> 0 && favorite.some((item)=>item.id===id);
