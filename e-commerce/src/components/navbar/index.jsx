@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom"
 export const Navbar = () => {
+    const naviagte = useNavigate();
     return (
         <>
             <header className="flex bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white">
@@ -9,7 +11,7 @@ export const Navbar = () => {
                 </div>
                 <nav className="ml-auto flex items-center gap-2">
                     <span class="material-symbols-outlined  text-2xl p-2 hover:cursor-pointer">
-                        shopping_cart
+                        <div onClick={()=> naviagte('/cart')}>shopping_cart</div>
                     </span>
                     <span class="material-symbols-outlined text-2xl p-2 hover:cursor-pointer">
                         login
