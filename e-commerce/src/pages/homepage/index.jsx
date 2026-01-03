@@ -19,6 +19,13 @@ export const Home = () => {
     return (
         <>
             <Navbar />
+           <main className="flex flex-wrap gap-4">
+  {products?.length > 0 &&
+    products.map((item) => {
+      return <div key={item.id}>{item.category.name}</div>;
+    })}
+</main>
+
             <main className="flex flex-wrap gap-6 justify-center mt-4">
                 {products
                     ?.filter(
