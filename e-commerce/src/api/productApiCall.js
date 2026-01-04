@@ -10,3 +10,12 @@ export const ProductApiCall = async () => {
     console.error("Error while fetching the product data", err);
   }
 };
+export const CategoriesApiCall = async () => {
+  const url = `${BaseUrl}/categories`;
+  try {
+    const CategoriesData = await axios.get(url);
+    return CategoriesData.data;
+  } catch (err) {
+    console.error("Error while fetching the product data", err);
+  }
+};
