@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 export const Navbar = () => {
     const naviagte = useNavigate();
+    const [isAccountDropOpen, setIsAccountDropOpen] = useState(false);
     return (
         <>
             <header className="flex bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white">
@@ -13,9 +15,13 @@ export const Navbar = () => {
                     <span class="material-symbols-outlined  text-2xl p-2 hover:cursor-pointer">
                         <div onClick={()=> naviagte('/cart')}>shopping_cart</div>
                     </span>
-                    <span class="material-symbols-outlined text-2xl p-2 hover:cursor-pointer">
-                        login
+                    
+                     <span onClick={()=>setIsAccountDropOpen(!isAccountDropOpen)} class="material-symbols-outlined text-2xl p-2 hover:cursor-pointer">
+                        account_circle
                     </span>
+                   { isAccountDropOpen && <div className="relative material-symbols-outlined text-2xl p-2 hover:cursor-pointer" onClick={()=>naviagte("/login")}> login
+                    </div>
+}
                     <span class="material-symbols-outlined text-2xl p-2 hover:cursor-pointer">
                         favorite
                     </span>
