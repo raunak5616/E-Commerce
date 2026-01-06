@@ -60,18 +60,6 @@ export const Login = () => {
 
           <motion.div variants={item} className="relative mb-6">
             <input
-              type="text"
-              required
-              className="peer w-full bg-transparent border border-white/40 rounded-lg px-4 py-3 text-white placeholder-transparent focus:outline-none focus:border-white"
-              placeholder="Name"
-            />
-            <label className="absolute left-4 top-3 text-white/70 text-sm transition-all peer-placeholder-shown:top-3 peer-focus:-top-2 peer-focus:text-xs peer-focus:bg-indigo-600 peer-focus:px-1">
-              Name
-            </label>
-          </motion.div>
-
-          <motion.div variants={item} className="relative mb-6">
-            <input
               type="email"
               required
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
