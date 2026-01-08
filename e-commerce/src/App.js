@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import { Home } from "./pages/homepage";
-import { CartCheckout } from "./pages/cart";
-import { Login } from "./pages/login";
-import Signup from "./pages/signup";
+import { Home } from "./frontend/pages/homepage";
+import { CartCheckout } from "./frontend/pages/cart";
+import { Login } from "./frontend/pages/login";
+import Signup from "./frontend/pages/signup";
 
 function App() {
   return (
