@@ -41,16 +41,13 @@ export default function Signup() {
             console.log("Signup error full:", err);
 
             if (err.response) {
-                // Server responded with status code (4xx / 5xx)
                 console.log("Response data:", err.response.data);
                 console.log("Status:", err.response.status);
                 alert(err.response.data.message || "Server error");
             } else if (err.request) {
-                // Request was made but no response
                 console.log("No response received:", err.request);
                 alert("No response from server");
             } else {
-                // Something else happened
                 console.log("Error message:", err.message);
                 alert(err.message);
             }
