@@ -1,19 +1,37 @@
 import { Navbar } from "../../components/navbar/index.jsx";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useState } from "react";
 
 export const Login = () => {
   const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  const [loginDetails, setLoginDetails] = useState({
+    email:"",
+    password:""
+  });
+  const onLoginChange = (e) => {
+    setLoginDetails({
+      ...loginDetails,
+      [e.target.name]: e.target.value
+    });
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!e.target.checkValidity()) {
-      e.target.reportValidity();
-      return;
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:5000/api/auth/login",loginDetails,
+        {
+          headers:{
+            "Content-Type":"application/json"
+          }
+        }
+      );
+      alert(response.data.message);
+      navigate("/");
+    } catch (error) {
+      
     }
-
-    alert("Login successful ✅");
   };
 
   // Animation variants
@@ -61,11 +79,12 @@ export const Login = () => {
           <motion.div variants={item} className="relative mb-6">
             <input
               type="email"
+              name="email"
               required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               title="Enter a valid email address"
               className="peer w-full bg-transparent border border-white/40 rounded-lg px-4 py-3 text-white placeholder-transparent focus:outline-none focus:border-white"
               placeholder="Email"
+              onChange={onLoginChange}
             />
             <label className="absolute left-4 top-3 text-white/70 text-sm transition-all peer-placeholder-shown:top-3 peer-focus:-top-2 peer-focus:text-xs peer-focus:bg-indigo-600 peer-focus:px-1">
               Email address
@@ -75,9 +94,9 @@ export const Login = () => {
           <motion.div variants={item} className="relative mb-8">
             <input
               type="password"
+              name="password"
               required
-              minLength="8"
-              pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}"
+         onChange={onLoginChange}
               title="Password must contain uppercase, lowercase, number & special character"
               className="peer w-full bg-transparent border border-white/40 rounded-lg px-4 py-3 text-white placeholder-transparent focus:outline-none focus:border-white"
               placeholder="Password"
