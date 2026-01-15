@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
-import { Navbar } from "../../components/navbar";
+import { Navbar } from "../../components/navbar/index.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {

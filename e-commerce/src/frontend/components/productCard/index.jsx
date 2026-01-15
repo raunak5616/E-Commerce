@@ -4,9 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
-import { useCart } from '../../context/card-context';
-import { findCartItem } from '../../utils/findCardtUtils';
-import { findFavoriteItem } from '../../utils/findFavorite';
+import { useCart } from '../../context/card-context.js';
+import { findCartItem } from '../../utils/findCardtUtils.js';
+import { findFavoriteItem } from '../../utils/findFavorite.js';
 export default function RecipeReviewCard({ product }) {
   const { cartDispatch } = useCart();
   const { cart,favorite } = useCart();

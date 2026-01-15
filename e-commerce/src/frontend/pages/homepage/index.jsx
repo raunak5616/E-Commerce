@@ -1,5 +1,5 @@
 import { ProductApiCall, CategoriesApiCall } from "../../api/productApiCall"
-import { Navbar } from "../../components/navbar"
+import { Navbar } from "../../components/navbar/index.jsx"
 import { useEffect, useState } from "react"
 import RecipeReviewCard from "../../components/productCard";
 import { useCart } from "../../context/card-context";

@@ -1,5 +1,5 @@
 import "./index.css";
-import { useCart } from "../../context/card-context";
+import { useCart } from "../../context/card-context.js";
 
 export const CartCard = ({ item }) => {
 

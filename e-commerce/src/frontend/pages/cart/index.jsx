@@ -1,6 +1,6 @@
-import { CartCard } from "../../components/cartCard";
-import { Navbar } from "../../components/navbar";
-import { useCart } from "../../context/card-context";
+import { CartCard } from "../../components/cartCard/index.jsx";
+import { Navbar } from "../../components/navbar/index.jsx";
+import { useCart } from "../../context/card-context.js";
 
 export const CartCheckout = () => {
   const { cart } = useCart();
