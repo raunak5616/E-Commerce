@@ -7,8 +7,8 @@ import { useState } from "react";
 export const Login = () => {
   const navigate = useNavigate();
   const [loginDetails, setLoginDetails] = useState({
-    email:"",
-    password:""
+    email: "",
+    password: ""
   });
   const onLoginChange = (e) => {
     setLoginDetails({
@@ -20,17 +20,21 @@ export const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/auth/login",loginDetails,
+        "http://127.0.0.1:5000/api/auth/login", loginDetails,
         {
-          headers:{
-            "Content-Type":"application/json"
+          headers: {
+            "Content-Type": "application/json"
           }
         }
       );
       alert(response.data.message);
       navigate("/");
     } catch (error) {
-      
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("An error occurred. Please try again.");
+      }
     }
   };
 
@@ -96,7 +100,7 @@ export const Login = () => {
               type="password"
               name="password"
               required
-         onChange={onLoginChange}
+              onChange={onLoginChange}
               title="Password must contain uppercase, lowercase, number & special character"
               className="peer w-full bg-transparent border border-white/40 rounded-lg px-4 py-3 text-white placeholder-transparent focus:outline-none focus:border-white"
               placeholder="Password"
