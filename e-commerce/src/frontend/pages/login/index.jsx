@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useState } from "react";
+import { useAuth } from "../../context/auth-Context.js";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""
@@ -27,6 +29,8 @@ export const Login = () => {
           }
         }
       );
+      const token = response.data.token;
+     login(token);
       alert(response.data.message);
       navigate("/");
     } catch (error) {
