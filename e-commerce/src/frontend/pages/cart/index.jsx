@@ -1,3 +1,4 @@
+import axios from "axios";
 import { CartCard } from "../../components/cartCard/index.jsx";
 import { Navbar } from "../../components/navbar/index.jsx";
 import { useCart } from "../../context/card-context.js";
@@ -8,6 +9,56 @@ export const CartCheckout = () => {
     (acc, item) => acc + item.price * item.qty,
     0
   );
+   const handlePayment = async () => {
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/create-order",
+      {
+        amount: subtotal * 80, // number
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const order = res.data;
+
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: "INR",
+      name: "My E-Commerce",
+      description: "Order Payment",
+      order_id: order.id,
+
+      handler: async function (response) {
+        const verifyRes = await axios.post(
+          "http://localhost:5000/verify-payment",
+          response,
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        if (verifyRes.data.success) {
+          alert("Payment Successful ✅");
+        } else {
+          alert("Payment Failed ❌");
+        }
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (error) {
+    console.error("Payment Error:", error);
+    alert("Something went wrong");
+  }
+};
+
   return (
     <>
       <Navbar />
@@ -53,7 +104,7 @@ export const CartCheckout = () => {
               <span>Total Amount</span>
               <span>₹{(subtotal)*80}</span>
             </div>
-            <button className="pay-btn">Proceed to Payment</button>
+            <button className="pay-btn" onClick={handlePayment}>Proceed to Payment</button>
           </div>
         </div>
       </div>

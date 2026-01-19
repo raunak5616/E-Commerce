@@ -24,7 +24,7 @@ export const Navbar = () => {
 
   return (
     <header className="flex bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white">
-      <div className="mr-auto flex gap-2">
+      <div className="mr-auto flex gap-2 hover:cursor-pointer" onClick={()=> navigate("/")}>
         <span className="material-symbols-outlined text-4xl p-2 ml-5">
           shopping_bag_speed
         </span>
