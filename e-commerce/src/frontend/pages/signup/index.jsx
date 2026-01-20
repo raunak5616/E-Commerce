@@ -26,7 +26,7 @@ export default function Signup() {
 
         try {
             const response = await axios.post(
-                `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`,
+                `${process.env.REACT_APP_API_URL}/api/auth/signup`,
                 user,
                 {
                     headers: {
