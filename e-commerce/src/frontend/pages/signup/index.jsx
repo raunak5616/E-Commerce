@@ -26,7 +26,7 @@ export default function Signup() {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:5000/api/auth/signup",
+                `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`,
                 user,
                 {
                     headers: {
