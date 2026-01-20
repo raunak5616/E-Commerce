@@ -17,13 +17,9 @@ export const CartCheckout = () => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/create-order",
-      {
-        amount: subtotal * 80, // number
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
+      `${process.env.REACT_APP_API_URL}/create-order`,
+      { amount: subtotal * 80 },
+      { headers: { "Content-Type": "application/json" } }
     );
 
     const order = res.data;
@@ -38,7 +34,7 @@ export const CartCheckout = () => {
 
       handler: async function (response) {
         const verifyRes = await axios.post(
-          "http://localhost:5000/verify-payment",
+          `${process.env.REACT_APP_API_URL}/verify-payment`,
           response,
           { headers: { "Content-Type": "application/json" } }
         );
@@ -48,6 +44,10 @@ export const CartCheckout = () => {
         } else {
           alert("Payment Failed ❌");
         }
+      },
+
+      theme: {
+        color: "#3399cc",
       },
     };
 
