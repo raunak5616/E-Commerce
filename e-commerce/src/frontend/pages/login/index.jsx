@@ -22,7 +22,7 @@ export const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/auth/login", loginDetails,
+         `${process.env.REACT_APP_API_URL}/create-order`, loginDetails,
         {
           headers: {
             "Content-Type": "application/json"
