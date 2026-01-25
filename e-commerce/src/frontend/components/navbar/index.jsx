@@ -63,10 +63,6 @@ export const Navbar = () => {
             )}
           </div>
         )}
-
-        <span className="material-symbols-outlined text-2xl p-2 hover:cursor-pointer">
-          favorite
-        </span>
       </nav>
     </header>
   );
