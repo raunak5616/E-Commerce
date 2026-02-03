@@ -7,7 +7,6 @@ export const Navbar = () => {
   const [isAccountDropOpen, setIsAccountDropOpen] = useState(false);
 
   const { isAuthenticated, logout } = useAuth();
-
   const handleCart = () => {
     if (!isAuthenticated) {
       alert("Please login to access cart");
